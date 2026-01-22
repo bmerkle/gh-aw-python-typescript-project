@@ -18,31 +18,33 @@ describe('greet function', () => {
 });
 
 describe('HelloWorld class', () => {
-  it('should initialize with default name', () => {
-    const hw = new HelloWorld();
-    expect((hw as any).defaultName).toBe('World');
-  });
-
-  it('should initialize with custom name', () => {
-    const hw = new HelloWorld('TypeScript');
-    expect((hw as any).defaultName).toBe('TypeScript');
-  });
-
-  it('should greet with default name', () => {
+  it('should greet with default name when initialized without arguments', () => {
     const hw = new HelloWorld();
     const result = hw.greet();
     expect(result).toBe('Hello, World!');
   });
 
-  it('should greet with custom default name', () => {
+  it('should greet with custom default name when initialized with a name', () => {
     const hw = new HelloWorld('TypeScript');
     const result = hw.greet();
     expect(result).toBe('Hello, TypeScript!');
   });
 
-  it('should greet with name override', () => {
-    const hw = new HelloWorld('TypeScript');
+  it('should greet with provided name when called with an argument', () => {
+    const hw = new HelloWorld();
     const result = hw.greet('Alice');
     expect(result).toBe('Hello, Alice!');
+  });
+
+  it('should allow overriding the default name in greet call', () => {
+    const hw = new HelloWorld('TypeScript');
+    const result = hw.greet('Bob');
+    expect(result).toBe('Hello, Bob!');
+  });
+
+  it('should greet with empty string when provided', () => {
+    const hw = new HelloWorld('TypeScript');
+    const result = hw.greet('');
+    expect(result).toBe('Hello, !');
   });
 });
